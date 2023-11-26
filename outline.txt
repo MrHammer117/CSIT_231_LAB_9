@@ -1,0 +1,7 @@
+Project outline 
+
+
+Shit to be done:
+  madLib (Walter)
+  Condtional statements for creating another madlib, find and replace (Adrian)
+  
