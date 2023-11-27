@@ -1,4 +1,6 @@
 #!/bin/bash
+
+#Contributors: Adrian Humphrey, Nick Mann, Bryan Gavria, Walter Cardona
 function madLib(){
     pathVariable=$1
     echo "$pathVariable"
