@@ -14,6 +14,10 @@ function replaceFirst(){
     echo "Dummy"
 }
 
+function copyDoc(){
+    echo "Dumber"
+}
+
 user=$(whoami)
 
 pathLink=$1
