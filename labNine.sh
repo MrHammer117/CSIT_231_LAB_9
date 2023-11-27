@@ -1,42 +1,47 @@
-user = $(whoami)
-
+#!/bin/bash
 function madLib(){
-
+    pathVariable=$1
+    echo "$pathVariable"
 }
 
 function replaceAll(){
-
+    #pathVariable=$1
+    #echo "$pathVariable"
+    echo "Balls"
 }
 
 function replaceFirst(){
-
+    echo "Dummy"
 }
 
-madLib
+user=$(whoami)
 
-sentinel = true
+pathLink=$1
+
+madLib "$pathLink"
+
+sentinel=true
 #This loop will let the user make edits to the madlib they just completed
 #or it will allow them to start a new madlib, or quit.
-while[$sentinel = true]
+while [ "$sentinel" = true ]
 do
-    echo "$user do you want to (R)eplace all, Replace (F)irst occurance, new (M)adLib, or -Q quit."
-    read userCommand
+    echo "$user do you want to (R)eplace all, Replace (F)irst occurance, new (M)adLib, or (Q)uit."
+    read -r userCommand
     #This is the equivalent of the switch statement that will take in and return the proper output file.
-    if[$userCommand = "R"]
+    if [ "$userCommand" = "R" ] || [ "$userCommand" = "r" ]
     then
         replaceAll
-    fi
-    if[$userCommand = "F"]
+    elif [ "$userCommand" = "F" ] || [ "$userCommand" = "f" ]
     then
         replaceFirst
-    fi
-    if[$userCommand = "M"]
+    elif [ "$userCommand" = "M" ] || [ "$userCommand" = "m" ]
     then
-        madLib
-    fi
-    if[$userCommand = "Q"]
+        madLib "$pathLink"
+    elif [ "$userCommand" = "Q" ] || [ "$userCommand" = "q" ]
     then
-        sentinel = false
+        sentinel=false
+    else
+        echo "Please retry, $user, you entered invalid input."
     fi
-
+    
 done
