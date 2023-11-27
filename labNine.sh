@@ -4,6 +4,18 @@
 function madLib(){
     pathVariable=$1
     echo "$pathVariable"
+
+    echo "Hello"
+
+
+
+
+
+
+
+
+
+
 }
 
 function replaceAll(){
