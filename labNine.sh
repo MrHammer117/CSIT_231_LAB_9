@@ -1,20 +1,29 @@
 #!/bin/bash
 
 #Contributors: Adrian Humphrey, Nick Mann, Bryan Gavria, Walter Cardona
+
+function copyDoc(){
+    echo "Dumber"
+
+    #HOW TO SEND IN AND RETURN A VARIABLE FOR PATH
+    #function myfunc()
+    #{
+        #local  __resultvar=$1
+        #local  myresult='some value'
+        #eval $__resultvar="'$myresult'"
+    #}
+
+    #myfunc result
+    #echo $result
+}
+
 function madLib(){
     pathVariable=$1
     echo "$pathVariable"
 
-    echo "Hello"
+    copyDoc pathVariable
 
-
-
-
-
-
-
-
-
+    #Take in input LINE BY LINE and alter/replace the blank sapces within each line of text. Look up how to take in a string Line by line and output it to the copied textfile.
 
 }
 
@@ -26,11 +35,11 @@ function replaceAll(){
 
 function replaceFirst(){
     echo "Dummy"
+
+
 }
 
-function copyDoc(){
-    echo "Dumber"
-}
+
 
 user=$(whoami)
 
