@@ -40,6 +40,13 @@ function madLib(){
     echo "When I got there, I couldn't believe my _________! There were __________    ________ on the __________! [Part of the body, plural/Plural noun/Verb ending in -ing/Noun]"
     read ans11 ans12 ans13 ans14
 
+
+    echo "Your mad lib here: "
+    echo "It was $ans, cold November day."
+    echo "I woke up to the $ans2 smell of $ans3 roasting in the $ans4 downstairs."
+    echo "I $ans5 down the stairs to see if I could help $ans6 the dinner."
+    echo "My mom said, "See if $ans7 needs a fresh $ans8." So I carried a tray of glasses full of $ans9 into the $ans10 room."
+    echo "When I got there, I couldn't believe my $ans11! There were $ans12 $ans13 on the $ans14!"
 }
 
 function replaceAll(){
