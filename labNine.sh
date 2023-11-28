@@ -15,6 +15,8 @@ function copyDoc(){
 
     #myfunc result
     #echo $result
+
+    #cat original_document.txt > new_document.txt
 }
 
 function madLib(){
