@@ -22,8 +22,23 @@ function madLib(){
     echo "$pathVariable"
 
     copyDoc pathVariable
-
+    
     #Take in input LINE BY LINE and alter/replace the blank sapces within each line of text. Look up how to take in a string Line by line and output it to the copied textfile.
+
+    echo "It was __________, cold November day. [Adjective]: "
+    read ans
+    
+    echo "I woke up to the _________ smell of ___________ roasting in the __________ downstairs. [Adjective/Type of bird/Room in a house]: "
+    read ans2 ans3 ans4
+
+    echo "I ___________ down the stairs to see if I could help ________ the dinner. [Verb, past tense/Verb]: "
+    read ans5 ans6
+
+    echo "My mom said, "See if _________ needs a fresh ______." So I carried a tray of glasses full of _________ into the ____________ room. [Name/Noun/A liquid/Verb ending in -ing]: "
+    read ans7 ans8 ans9 ans10
+
+    echo "When I got there, I couldn't believe my _________! There were __________    ________ on the __________! [Part of the body, plural/Plural noun/Verb ending in -ing/Noun]"
+    read ans11 ans12 ans13 ans14
 
 }
 
