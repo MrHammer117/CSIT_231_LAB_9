@@ -3,12 +3,12 @@
 #Contributors: Adrian Humphrey, Nick Mann, Bryan Gavria, Walter Cardona
 
 function copyDoc(){
-    source_file=$1
-    destination_directory="$PWD"
+    local source_file=$1
+    local destination_directory="$PWD"
 
-    base_name=$(basename "$source_file")
+    local base_name=$(basename "$source_file")
 
-    destination_file="$destination_directory/$base_name"
+    local destination_file="$destination_directory/$base_name"
 
     touch "$destination_file"
     cat "$source_file" > "$destination_file"
@@ -17,8 +17,7 @@ function copyDoc(){
 }
 
 function madLib(){
-    pathVariable=$1
-    newFile=$(copyDoc "$pathVariable")
+    newFile=$1
     
     #Take in input LINE BY LINE and alter/replace the blank sapces within each line of text. Look up how to take in a string Line by line and output it to the copied textfile.
 
@@ -69,7 +68,9 @@ function main() {
     local user=$(whoami)
     local pathLink=$1
 
-    madLib "$pathLink"
+    newFile=$(copyDoc "$pathLink")
+
+    madLib "$newFile"
     local original_madlib="$madlib"  # Save the original madlib
 
     local sentinel=true
