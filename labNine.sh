@@ -3,12 +3,12 @@
 #Contributors: Adrian Humphrey, Nick Mann, Bryan Gavria, Walter Cardona
 
 function copyDoc(){
-    local source_file=$1
-    local destination_directory="$PWD"
+    source_file=$1
+    destination_directory="$(pwd)"
 
-    local base_name=$(basename "$source_file")
+    base_name="copy_file.txt"
 
-    local destination_file="$destination_directory/$base_name"
+    destination_file="$destination_directory/$base_name"
 
     touch "$destination_file"
     cat "$source_file" > "$destination_file"
@@ -57,6 +57,8 @@ function replaceFirst() {
     local madlib_template=$1
     local word_to_replace=$2
     local replacement_word=$3
+    local file_content
+    
 
     # Find the first occurrence of the word and replace it
     local modified_madlib=$(echo "$madlib_template" | sed "s/\b$word_to_replace\b/$replacement_word/")
@@ -71,7 +73,6 @@ function main() {
     newFile=$(copyDoc "$pathLink")
 
     madLib "$newFile"
-    local original_madlib="$madlib"  # Save the original madlib
 
     local sentinel=true
 
@@ -86,11 +87,10 @@ function main() {
             read -r word_to_replace
             echo "Enter the replacement word:"
             read -r replacement_word
-            original_madlib=$(replaceFirst "$original_madlib" "$word_to_replace" "$replacement_word")
-            echo "Modified madlib: $original_madlib"
+            replaceFirst "$newFile" "$word_to_replace" "$replacement_word"
+            echo "Modified madlib: $newFile"
         elif [ "$userCommand" = "M" ] || [ "$userCommand" = "m" ]; then
             madLib "$pathLink"
-            original_madlib="$madlib"  # Save the new madlib
         elif [ "$userCommand" = "Q" ] || [ "$userCommand" = "q" ]; then
             sentinel=false
         else
