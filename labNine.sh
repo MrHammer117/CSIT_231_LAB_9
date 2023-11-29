@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#Contributors: Adrian Humphrey, Nick Mann, Bryan Gavria, Walter Cardona
+#Contributors: Adrian Humphrey, Nick Mann, Bryan Gaviria, Walter Cardona
 
 function copyDoc(){
     source_file=$1
-    destination_directory="$(pwd)"
+    destination_directory="$PWD"
 
-    base_name="copy_file.txt"
+    base_name=$(basename "$source_file")
 
     destination_file="$destination_directory/$base_name"
 
@@ -18,6 +18,41 @@ function copyDoc(){
 
 function madLib(){
     newFile=$1
+
+    file_path="copy_file.txt"
+    
+
+    getWord(){
+        read -p "Enter a $1 " word
+        echo "$word"
+    }
+
+    while IFS= read -r line; do
+
+        changedLine="${line/(adjective)/$(get_word 'adjective')}"
+        changedLine="${changedLine/(type of bird)/$(get_word 'type of bird')}"
+        changedLine="${changedLine/(room in a house)/$(get_word 'room in a house')}"
+        changedLine="${changedLine/(verb, past tense)/$(get_word 'verb, past tense')}"
+        changedLine="${changedLine/(verb)/$(get_word 'verb')}"
+        changedLine="${changedLine/(relatives name)/$(get_word 'relatives name')}"
+        changedLine="${changedLine/(noun)/$(get_word 'noun')}"
+        changedLine="${changedLine/(a liquid)/$(get_word 'a liquid')}"
+        changedLine="${changedLine/(verb ending in -ing)/$(get_word 'verb ending in -ing')}"
+        changedLine="${changedLine/(part of the body, plural)/$(get_word 'part of the body, plural')}"
+        changedLine="${changedLine/(plural noun)/$(get_word 'plural noun')}"
+        changedLine="${changedLine/(verb ending in -ing)/$(get_word 'verb ending in -ing')}"
+
+         # Print changed line..... i hope
+        echo "$changedLine"
+    
+        
+        echo "$changedLine" >> temp_copy_file.txt
+    done < "$file_path"
+
+    
+    mv temp_copy_file.txt "$file_path"
+
+ echo "Modified content written back to $file_path."
     
     #Take in input LINE BY LINE and alter/replace the blank sapces within each line of text. Look up how to take in a string Line by line and output it to the copied textfile.
 
@@ -57,8 +92,6 @@ function replaceFirst() {
     local madlib_template=$1
     local word_to_replace=$2
     local replacement_word=$3
-    local file_content
-    
 
     # Find the first occurrence of the word and replace it
     local modified_madlib=$(echo "$madlib_template" | sed "s/\b$word_to_replace\b/$replacement_word/")
@@ -73,6 +106,7 @@ function main() {
     newFile=$(copyDoc "$pathLink")
 
     madLib "$newFile"
+    local original_madlib="$madlib"  # Save the original madlib
 
     local sentinel=true
 
@@ -87,10 +121,11 @@ function main() {
             read -r word_to_replace
             echo "Enter the replacement word:"
             read -r replacement_word
-            replaceFirst "$newFile" "$word_to_replace" "$replacement_word"
-            echo "Modified madlib: $newFile"
+            original_madlib=$(replaceFirst "$original_madlib" "$word_to_replace" "$replacement_word")
+            echo "Modified madlib: $original_madlib"
         elif [ "$userCommand" = "M" ] || [ "$userCommand" = "m" ]; then
             madLib "$pathLink"
+            original_madlib="$madlib"  # Save the new madlib
         elif [ "$userCommand" = "Q" ] || [ "$userCommand" = "q" ]; then
             sentinel=false
         else
