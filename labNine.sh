@@ -3,20 +3,9 @@
 #Contributors: Adrian Humphrey, Nick Mann, Bryan Gavria, Walter Cardona
 
 function copyDoc(){
-    echo "Dumber"
-
-    #HOW TO SEND IN AND RETURN A VARIABLE FOR PATH
-    #function myfunc()
-    #{
-        #local  __resultvar=$1
-        #local  myresult='some value'
-        #eval $__resultvar="'$myresult'"
-    #}
-
-    #myfunc result
-    #echo $result
-
-    #cat original_document.txt > new_document.txt
+    originalPath=$1
+    newPath=2
+    cat "$originalPath"> new_document.txt
 }
 
 function madLib(){
