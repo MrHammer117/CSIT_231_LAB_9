@@ -3,28 +3,22 @@
 #Contributors: Adrian Humphrey, Nick Mann, Bryan Gavria, Walter Cardona
 
 function copyDoc(){
-    originalPath=$1
-    newPath=2
-    cat "$originalPath"> new_document.txt
-    echo "Dumber"
+    source_file=$1
+    destination_directory="$PWD"
 
-    #HOW TO SEND IN AND RETURN A VARIABLE FOR PATH
-    #function myfunc()
-    #{
-        #local  __resultvar=$1
-        #local  myresult='some value'
-        #eval $__resultvar="'$myresult'"
-    #}
+    base_name=$(basename "$source_file")
 
-    #myfunc result
-    #echo $result
+    destination_file="$destination_directory/$base_name"
+
+    touch "$destination_file"
+    cat "$source_file" > "$destination_file"
+
+    echo "$destination_file"
 }
 
 function madLib(){
     pathVariable=$1
-    echo "$pathVariable"
-
-    copyDoc pathVariable
+    newFile=$(copyDoc "$pathVariable")
     
     #Take in input LINE BY LINE and alter/replace the blank sapces within each line of text. Look up how to take in a string Line by line and output it to the copied textfile.
 
