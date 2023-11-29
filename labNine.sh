@@ -55,42 +55,51 @@ function replaceAll(){
     echo "Balls"
 }
 
-function replaceFirst(){
-    echo "Dummy"
+#!/bin/bash
 
+function replaceFirst() {
+    local madlib_template=$1
+    local word_to_replace=$2
+    local replacement_word=$3
 
+    # Find the first occurrence of the word and replace it
+    local modified_madlib=$(echo "$madlib_template" | sed "s/\b$word_to_replace\b/$replacement_word/")
+
+    echo "$modified_madlib"
 }
 
+function main() {
+    local user=$(whoami)
+    local pathLink=$1
 
+    madLib "$pathLink"
+    local original_madlib="$madlib"  # Save the original madlib
 
-user=$(whoami)
+    local sentinel=true
 
-pathLink=$1
+    while [ "$sentinel" = true ]; do
+        echo "$user do you want to (R)eplace all, Replace (F)irst occurrence, new (M)adLib, or (Q)uit."
+        read -r userCommand
 
-madLib "$pathLink"
+        if [ "$userCommand" = "R" ] || [ "$userCommand" = "r" ]; then
+            replaceAll
+        elif [ "$userCommand" = "F" ] || [ "$userCommand" = "f" ]; then
+            echo "Enter the word to replace:"
+            read -r word_to_replace
+            echo "Enter the replacement word:"
+            read -r replacement_word
+            original_madlib=$(replaceFirst "$original_madlib" "$word_to_replace" "$replacement_word")
+            echo "Modified madlib: $original_madlib"
+        elif [ "$userCommand" = "M" ] || [ "$userCommand" = "m" ]; then
+            madLib "$pathLink"
+            original_madlib="$madlib"  # Save the new madlib
+        elif [ "$userCommand" = "Q" ] || [ "$userCommand" = "q" ]; then
+            sentinel=false
+        else
+            echo "Please retry, $user, you entered invalid input."
+        fi
+    done
+}
 
-sentinel=true
-#This loop will let the user make edits to the madlib they just completed
-#or it will allow them to start a new madlib, or quit.
-while [ "$sentinel" = true ]
-do
-    echo "$user do you want to (R)eplace all, Replace (F)irst occurance, new (M)adLib, or (Q)uit."
-    read -r userCommand
-    #This is the equivalent of the switch statement that will take in and return the proper output file.
-    if [ "$userCommand" = "R" ] || [ "$userCommand" = "r" ]
-    then
-        replaceAll
-    elif [ "$userCommand" = "F" ] || [ "$userCommand" = "f" ]
-    then
-        replaceFirst
-    elif [ "$userCommand" = "M" ] || [ "$userCommand" = "m" ]
-    then
-        madLib "$pathLink"
-    elif [ "$userCommand" = "Q" ] || [ "$userCommand" = "q" ]
-    then
-        sentinel=false
-    else
-        echo "Please retry, $user, you entered invalid input."
-    fi
-    
-done
+# Call the main function with the provided argument
+main "$1"
