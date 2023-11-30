@@ -71,6 +71,12 @@ function replaceFirst() {
 #   ------------------------------------------------------------------------------------------------------------------  -------------------------
 #   |                                                                                                                |  |                       |
     awk -v old="$word_to_replace" -v new="$replacement_word" '{if(!f && sub(old, new)) f=1} 1' "$cpFile" > tmpfile.txt && mv tmpfile.txt "$cpFile"
+#                                                            |                                |
+#                                                            ----------------------------------
+#                                                                           ^
+#                                                                           |
+#                                                           This is what substitutes the old word 
+#                                                           out with the new word!
 }
 
 function main() {
