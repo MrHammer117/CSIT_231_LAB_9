@@ -7,17 +7,26 @@
 #                               VVVVV
 #bash labNine.sh /home/hammer/Lab_Nine/CSIT_231_LAB_9/MadLib.txt
 
+#This function makes a new file called Copy_file, which is the file that has the madlib stored to edit.
+
 function copyDoc(){
-    local source_file=$1
+    local source_file=$1 # This is the file that will be copied
+
+    #Set variable to the current working directory
     local destination_directory="$PWD"
 
     local base_name="copy_file.txt"
 
+    #Makes the destination file path by putting together the destination directory and base name
     local destination_file="$destination_directory/$base_name"
 
+    #Creates an empty file at the destination path
     touch "$destination_file"
+
+    #Copies the source files contnets and puts it in destination file
     cat "$source_file" > "$destination_file"
 
+    #This will output the path of the destination file
     echo "$destination_file"
 }
 
@@ -27,12 +36,15 @@ function madLib(){
     
     # Count the exact occurrences of the placeholder word
     local line_count=$(awk -v word="$wordToRplce" '{ count += gsub(word, "") } END { print count }' "$madFile")
-
     
+
     cat "$madFile"
     echo ""
     echo ""
     echo ""
+    #the for loop will print out the madlib and will ask the user for input.
+    #After every input, the madlib will update the current line with what the user typed in. 
+    #This loop also edits the madlib text document.
     for ((i = 1; i <= line_count; i++)); do
         echo "Please enter a word for the madlib:"
         read -r newWord
@@ -92,7 +104,11 @@ function main() {
 
     local sentinel=true
 
+    
     while [ "$sentinel" = true ]; do
+
+        #After the madlib is finished, this prompt will appear and ask the user what they want to do next. 
+        #Input the letter in the parenthesis to make your choice.
         echo "$user, do you want to (R)eplace all, Replace (F)irst occurrence, new (M)adLib, or (Q)uit."
         read -r userCommand
 
