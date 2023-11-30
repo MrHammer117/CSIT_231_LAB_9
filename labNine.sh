@@ -28,12 +28,25 @@ function madLib(){
     # Count the exact occurrences of the placeholder word
     local line_count=$(awk -v word="$wordToRplce" '{ count += gsub(word, "") } END { print count }' "$madFile")
     
-
+    cat "$madFile"
+    echo ""
+    echo ""
+    echo ""
     for ((i = 1; i <= line_count; i++)); do
         echo "Please enter a word for the madlib:"
         read -r newWord
         replaceFirst "$wordToRplce" "$newWord" "$madFile"
+        cat "$madFile"
+        echo ""
+        echo ""
     done
+    echo ""
+    echo ""
+    echo ""
+    echo "Done with the MadLib:"
+    echo ""
+    echo ""
+    cat "$madFile"
 }
 
 function replaceAll(){
@@ -80,7 +93,8 @@ function main() {
             replaceFirst "$word_to_replace" "$replacement_word" "$newFile"
             echo "Modified madlib: $(cat "$newFile")"
         elif [ "$userCommand" = "M" ] || [ "$userCommand" = "m" ]; then
-            madLib "$newFile"
+            local copyFile=$(copyDoc "$pathLink")
+            madLib "$copyFile"
         elif [ "$userCommand" = "Q" ] || [ "$userCommand" = "q" ]; then
             sentinel=false
         else
