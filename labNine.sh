@@ -23,16 +23,16 @@ function copyDoc(){
 
 function madLib(){
     local madFile=$1
-    local replceWrd="__________"
+    local wordToRplce="__________"
     
     # Count the exact occurrences of the placeholder word
-    local line_count=$(awk -v word="$replceWrd" '{ count += gsub(word, "") } END { print count }' "$madFile")
-    replaceFirst "$orgWord" "$replceWrd" "$madFile"
+    local line_count=$(awk -v word="$wordToRplce" '{ count += gsub(word, "") } END { print count }' "$madFile")
+    
 
     for ((i = 1; i <= line_count; i++)); do
         echo "Please enter a word for the madlib:"
-        read -r orgWord
-
+        read -r newWord
+        replaceFirst "$wordToRplce" "$newWord" "$madFile"
     done
 }
 
@@ -47,7 +47,13 @@ function replaceFirst() {
     local replacement_word=$2
     local cpFile=$3
 
-    awk -v old="$word_to_replace" -v new="$replacement_word" '{if(!f && sub(old, new)) f=1} 1' "$cpFile" > new_file.txt
+    #This Replaces the first occurance of a particular word in a file                           This over here has the information print to a temp file 
+#                             |                                                                 and then copy that back into the original copy_file.txt
+#                             |                                                                                                     |
+#                             V                                                                                                     V
+#   ------------------------------------------------------------------------------------------------------------------  -------------------------
+#   |                                                                                                                |  |                       |
+    awk -v old="$word_to_replace" -v new="$replacement_word" '{if(!f && sub(old, new)) f=1} 1' "$cpFile" > tmpfile.txt && mv tmpfile.txt "$cpFile"
 }
 
 function main() {
@@ -57,7 +63,6 @@ function main() {
     local newFile=$(copyDoc "$pathLink")
 
     madLib "$newFile"
-    #local original_madlib="$newFile"  # Save the original madlib
 
     local sentinel=true
 
