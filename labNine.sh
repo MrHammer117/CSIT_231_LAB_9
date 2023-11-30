@@ -50,9 +50,13 @@ function madLib(){
 }
 
 function replaceAll(){
-    #pathVariable=$1
-    #echo "$pathVariable"
-    echo "Balls"
+    local word_to_replace=$1
+    local replacement_word=$2
+    local cpFile=$3
+
+    # Replace all occurrences of a particular word in a file
+    awk -v old="$word_to_replace" -v new="$replacement_word" '{ gsub(old, new) } 1' "$cpFile" > tmpfile.txt && mv tmpfile.txt "$cpFile"
+    
 }
 
 function replaceFirst() {
@@ -84,7 +88,12 @@ function main() {
         read -r userCommand
 
         if [ "$userCommand" = "R" ] || [ "$userCommand" = "r" ]; then
-            replaceAll
+            echo "Enter the word to replace:"
+            read -r word_to_replace
+            echo "Enter the replacement word:"
+            read -r replacement_word
+            replaceAll "$word_to_replace" "$replacement_word" "$newFile"
+            echo "Modified madlib: $(cat "$newFile")"
         elif [ "$userCommand" = "F" ] || [ "$userCommand" = "f" ]; then
             echo "Enter the word to replace:"
             read -r word_to_replace
