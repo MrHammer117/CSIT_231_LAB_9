@@ -32,7 +32,7 @@ function madLib(){
     for ((i = 1; i <= line_count; i++)); do
         echo "Please enter a word for the madlib:"
         read -r orgWord
-        #sed "0,/$replacement_word/{s/$replacement_word/$word_to_replace/}" "$cpFile" > "finalFile.txt"
+
     done
 }
 
@@ -47,7 +47,7 @@ function replaceFirst() {
     local replacement_word=$2
     local cpFile=$3
 
-    sed "0,/$word_to_replace/s/$word_to_replace/$replacement_word/" "$cpFile" > "finalFile.txt"
+    awk -v old="$word_to_replace" -v new="$replacement_word" '{if(!f && sub(old, new)) f=1} 1' "$cpFile" > new_file.txt
 }
 
 function main() {
