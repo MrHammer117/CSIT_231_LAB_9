@@ -27,6 +27,7 @@ function madLib(){
     
     # Count the exact occurrences of the placeholder word
     local line_count=$(awk -v word="$wordToRplce" '{ count += gsub(word, "") } END { print count }' "$madFile")
+
     
     cat "$madFile"
     echo ""
@@ -76,7 +77,9 @@ function replaceFirst() {
 #                                                                           ^
 #                                                                           |
 #                                                           This is what substitutes the old word 
-#                                                           out with the new word!
+#                                                           out with the new word! f=1 determines
+#                                                           that we are only changing the first 
+#                                                           word!
 }
 
 function main() {
