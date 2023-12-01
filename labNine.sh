@@ -5,7 +5,7 @@
 #MAKE SURE TO RUN VIA THIS COMMAND, OTHERWISE IT WILL NOT RUN AS INTENDED:
 #                               |||||
 #                               VVVVV
-#bash labNine.sh /home/hammer/Lab_Nine/CSIT_231_LAB_9/MadLib.txt
+#bash labNine.sh MadLib.txt
 
 #This function makes a new file called Copy_file, which is the file that has the madlib stored to edit.
 
